@@ -3,7 +3,7 @@ use sakila;
 -- 1a
 select first_name, last_name from actor;
 
---1b
+-- 1b
 select concat_ws(" ", first_name, last_name) as ACTOR from actor;
 
 -- 2a
@@ -63,7 +63,7 @@ group by s.first_name, s.last_name, s.staff_id;
 -- 6c
 select f.title, count(actor_id) as NumActors
 from film as f inner join film_actor as fa where f.film_id = fa.film_id 
-group by f.title
+group by f.title;
 
 -- 6d
 select f.title, f.film_id, count(i.film_id) as Inventory
@@ -81,7 +81,7 @@ select title from film
 where title like 'K%' or title like 'Q%'
 and language_id in (
   select language_id from language where name = 'English'
-  )
+  );
   
   
 -- 7b
@@ -91,21 +91,21 @@ where actor_id in (
   where film_id in (
     select film_id from film where title = 'Alone Trip'
     )
-  )
+  );
   
 -- 7c
 select c.first_name, c.last_name, c.email, co.country
 from (customer as c inner join address as a on c.address_id = a.address_id
       inner join city as cy on a.city_id = cy.city_id)
 	  inner join country as co on a.city_id = cy.city_id
-where co.country = 'Canada'
+where co.country = 'Canada';
 
 
 -- 7d
 select f.title, c.name 
 from film f inner join film_category fc on f.film_id = fc.film_id
             inner join category c on fc.category_id = c.category_id
-where c.name = 'Family'
+where c.name = 'Family';
 
 -- 7e
 select f.title, count(r.rental_id) as RentalCount
@@ -150,7 +150,7 @@ create view GenreRevenue as
 	limit 5;
 
 -- 8b
-select * from GenreRevenue
+select * from GenreRevenue;
 
 -- 8c
-drop view GenreRevenue
+drop view GenreRevenue;
